@@ -1,6 +1,6 @@
 <script>
-  import Input from "../../../components/Inputs.svelte";
-  import FileUploader from "../../../components/FileUploader.svelte";
+  import Input from "../../../lib/components/Inputs.svelte";
+  import FileUploader from "../../../lib/components/FileUploader.svelte";
 
   export let title = "Input Component Example";
 

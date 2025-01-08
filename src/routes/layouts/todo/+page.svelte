@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Button from "../../../components/Button.svelte";
-  import Input from "../../../components/Inputs.svelte";
+  import Button from "../../../lib/components/Button.svelte";
+  import Input from "../../../lib/components/Inputs.svelte";
 
   // State to manage tasks
   let tasks: { text: string; id: number }[] = [];

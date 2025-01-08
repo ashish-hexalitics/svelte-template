@@ -1,5 +1,5 @@
 <script>
-  import Button from "../../../components/Button.svelte";
+  import Button from "../../../lib/components/Button.svelte";
 
   export let title = "Buttons Component Example";
   let isLoading = false;

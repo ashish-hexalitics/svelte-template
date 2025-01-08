@@ -1,6 +1,6 @@
 <script>
   // export let title = "Profile";
-  import Button from "../../../components/Button.svelte";
+  import Button from "../../../lib/components/Button.svelte";
   export let name = "John Doe";
   export let email = "john.doe@example.com";
   export let bio =

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Table from "../../../components/Table.svelte";
+  import Table from "../../../lib/components/Table.svelte";
 
   const columns: { key: string; label: string }[] = [
     { key: "id", label: "ID" },
