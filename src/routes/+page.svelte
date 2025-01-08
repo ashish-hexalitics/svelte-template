@@ -8,6 +8,7 @@
           <li><a href="#features" class="text-gray-600 hover:text-blue-600">Features</a></li>
           <li><a href="#testimonials" class="text-gray-600 hover:text-blue-600">Testimonials</a></li>
           <li><a href="#cta" class="text-gray-600 hover:text-blue-600">Contact</a></li>
+          <li><a href="/layouts/dashboard" class="text-gray-600 hover:text-blue-600">Dashboards</a></li>
         </ul>
       </nav>
     </div>
@@ -67,7 +68,7 @@
     <div class="container mx-auto px-6 text-center">
       <h3 class="text-3xl font-bold mb-4">Ready to Get Started?</h3>
       <p class="mb-6">Sign up today and take the first step toward success.</p>
-      <a href="#"
+      <a href="/"
          class="px-8 py-3 bg-white text-blue-600 rounded-lg shadow hover:bg-gray-100">
         Join Now
       </a>
@@ -75,9 +76,9 @@
   </section>
 
   <!-- Footer -->
-  <footer class="py-6 bg-gray-800 text-white">
+  <!-- <footer class="py-6 bg-gray-800 text-white">
     <div class="container mx-auto px-6 text-center">
       <p>&copy; 2025 YourBrand. All rights reserved.</p>
     </div>
-  </footer>
+  </footer> -->
 </div>

@@ -6,6 +6,7 @@
     { name: "inputs", href: "/layouts/inputs" },
     { name: "Tables", href: "/layouts/tables" },
     { name: "Settings", href: "/layouts/setting" },
+    { name: "Home", href: "/" },
   ];
 </script>
 
