@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+  /* Table design */
+  table {
+    border-radius: 8px;
+  }
+
+  td {
+    border-bottom: 2px solid #f3f4f6;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .search-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+  }
+
+  .no-data {
+    text-align: center;
+    padding: 16px;
+    font-size: 14px;
+    color: #9ca3af;
+    font-style: italic;
+  }
