@@ -1,5 +1,5 @@
 <script>
-  export let title = "Default Title";
+  // export let title = "Default Title";
 </script>
 
 <div class="p-6 bg-gray-100 flex-1">
