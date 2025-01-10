@@ -13,12 +13,12 @@
       return;
     }
     const data:any = await fetchAPI("/api/register", "POST", { email, password });
-    if (data?.data) {
+    if (data?.data?.user) {
       errorMessage = "";
       goto("/layouts/dashboard");
-    } else {
-      errorMessage = data?.error || "Login failed.";
-    }
+    } else if(data?.error) {
+        errorMessage = data?.error || "Registraion failed.";
+      }
     // errorMessage = "";
   } catch (error) {
     console.log(error)

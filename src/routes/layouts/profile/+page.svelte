@@ -1,13 +1,21 @@
-<script>
+<script lang="ts">
   // export let title = "Profile";
   import Button from "../../../lib/components/Button.svelte";
-  export let name = "John Doe";
-  export let email = "john.doe@example.com";
-  export let bio =
-    "A passionate developer with expertise in modern web technologies.";
+  import { onMount, getContext } from "svelte";
+  import { userStore } from "$lib/stores/userStore";
+  // let storedUser: any = null;
   export let imageUrl = "https://via.placeholder.com/150"; // Replace with a real image URL
 
   const handlePrimaryClick = () => {};
+
+  // Get user data from context
+  let storedUser: any = null;
+
+  userStore.subscribe((user) => {
+    storedUser = user;
+  });
+
+
 </script>
 
 <div class="p-8 bg-white shadow-lg rounded-lg max-w-full mx-auto">
@@ -20,15 +28,15 @@
       class="w-20 h-20 rounded-full border-2 border-blue-500"
     />
     <div>
-      <h2 class="text-2xl font-bold text-gray-800">{name}</h2>
-      <p class="text-gray-500">{email}</p>
+      <h2 class="text-2xl font-bold text-gray-800">{storedUser?.name}</h2>
+      <p class="text-gray-500">{storedUser?.email}</p>
     </div>
   </div>
 
   <!-- Profile Content -->
   <div>
     <h3 class="text-xl font-semibold text-gray-800 mb-2">About Me</h3>
-    <p class="text-gray-600 leading-relaxed">{bio}</p>
+    <p class="text-gray-600 leading-relaxed">{storedUser?.bio}</p>
   </div>
 
   <!-- Profile Actions -->

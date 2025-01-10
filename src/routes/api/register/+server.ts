@@ -1,10 +1,11 @@
 import { prisma } from "$lib/server/db";
 import { json } from "@sveltejs/kit";
 import bcrypt from "bcrypt";
-
+import jwt from "jsonwebtoken";
+const JWT_SECRET = "svelte_jwt_secret";
 // Login (Authenticate user)
 // Register (Create a new user)
-export const POST = async ({ request }) => {
+export const POST = async ({ request, cookies }) => {
   const { email, password, name, age } = await request.json();
 
   try {
@@ -27,22 +28,34 @@ export const POST = async ({ request }) => {
     const saltRounds = 10; // Adjust cost factor as needed
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    const newUser:any = await prisma.user.create({
+    const newUser: any = await prisma.user.create({
       data: {
         email,
-        password:hashedPassword,
+        password: hashedPassword,
         name: sanitizedName,
         age: sanitizedAge,
       },
     });
-    
-    delete newUser["password"]
 
-    return json(newUser, { status: 201 });
-  } catch (error: any) {
+    delete newUser["password"];
+
+    const token = jwt.sign({ userId: newUser.id }, JWT_SECRET, {
+      expiresIn: "1d",
+    });
+
+    cookies.set("session", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24, // 1 day
+      path: "/",
+    });
+
     return json(
-      error.message,
-      { status: 400 }
+      { message: "Registerd successful", user: newUser, token },
+      { status: 201 }
     );
+  } catch (error: any) {
+    return json(error.message, { status: 400 });
   }
 };

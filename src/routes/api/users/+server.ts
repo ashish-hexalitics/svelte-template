@@ -2,13 +2,45 @@ import { prisma } from "$lib/server/db";
 import { json } from "@sveltejs/kit";
 
 // Get all users
-export const GET = async () => {
-  try {
-    const users = await prisma.user.findMany();
-    return json(users, { status: 200 });
-  } catch (error: any) {
-    console.error("Error fetching users:", error);
-    return json({ error: "Failed to fetch users", details: error.message }, { status: 500 });
+export const GET = async ({ url }) => {
+  const id = url.searchParams.get("id"); // Fetch the 'id' from query params
+
+  if (id) {
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id },
+        omit: {
+          password: true,
+        },
+      });
+
+      if (!user) {
+        return json({ error: "User not found" }, { status: 404 });
+      }
+
+      return json({ user }, { status: 200 });
+    } catch (error: any) {
+      console.error("Error fetching user by ID:", error);
+      return json(
+        { error: "Failed to fetch user", details: error.message },
+        { status: 500 }
+      );
+    }
+  } else {
+    try {
+      const users = await prisma.user.findMany({
+        omit: {
+          password: true,
+        },
+      });
+      return json(users, { status: 200 });
+    } catch (error: any) {
+      console.error("Error fetching users:", error);
+      return json(
+        { error: "Failed to fetch users", details: error.message },
+        { status: 500 }
+      );
+    }
   }
 };
 
@@ -54,4 +86,3 @@ export const DELETE = async ({ request }) => {
     );
   }
 };
-

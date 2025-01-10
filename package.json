@@ -16,6 +16,7 @@
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@types/bcrypt": "^5.0.2",
+		"@types/jsonwebtoken": "^9.0.7",
 		"autoprefixer": "^10.4.20",
 		"postcss": "^8.4.49",
 		"svelte": "^5.0.0",
@@ -27,6 +28,7 @@
 	"dependencies": {
 		"@prisma/client": "^6.2.1",
 		"bcrypt": "^5.1.1",
+		"jsonwebtoken": "^9.0.2",
 		"prisma": "^6.2.1"
 	}
 }
