@@ -1,24 +1,45 @@
 <script lang="ts">
   import Button from "../../../lib/components/Button.svelte";
   import Input from "../../../lib/components/Inputs.svelte";
+  import { taskStore } from "$lib/stores/taskStore";
+  import { fetchAPI } from "$lib/utils/fetchAPI";
+  import { onMount } from "svelte";
 
   // State to manage tasks
-  let tasks: { text: string; id: number }[] = [];
+  // let tasks: { text: string; id: number }[] = [];
   let newTask = "";
   let isEditing: number | null = null;
   let editedTask = "";
   export let title = "To-Do List";
-  export let description =
-    "Add tasks to your to-do list and manage them efficiently.";
+  export let description ="Add tasks to your to-do list and manage them efficiently.";
 
   let isModalOpen = false;
 
+  // Get user data from context
+  let storedTasks: { text: string; id: number }[] = [];
+
+  taskStore.subscribe((task) => {
+    storedTasks = task;
+  });
+
+  const fetcTasks = async () => {
+    try {
+      const data: any = await fetchAPI(`/api/tasks`, "GET");
+      if (data?.data?.tasks) {
+        taskStore.set(data?.data?.tasks);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // Add a new task
-  const addTask = () => {
+  const addTask = async () => {
     if (newTask.trim()) {
-      tasks = [...tasks, { text: newTask, id: Date.now() }];
-      newTask = ""; // Clear the input
-      closeModal(); // Close modal after adding the task
+      await fetchAPI(`/api/tasks`, "POST", { text: newTask });
+      fetcTasks();
+      newTask = "";
+      closeModal();
     }
   };
 
@@ -33,8 +54,9 @@
   };
 
   // Delete a task
-  const deleteTask = (id: number) => {
-    tasks = tasks.filter((task) => task.id !== id);
+  const deleteTask = async (id: number) => {
+    await fetchAPI(`/api/tasks`, "DELETE", { id });
+    fetcTasks();
   };
 
   // Edit a task
@@ -43,10 +65,10 @@
     editedTask = currentText;
   };
 
-  const saveEdit = (id: number) => {
-    tasks = tasks.map((task) =>
-      task.id === id ? { ...task, text: editedTask.trim() } : task
-    );
+  const saveEdit = async (id: number) => {
+    const editedTaskData = { id, text: editedTask.trim() };
+    await fetchAPI(`/api/tasks`, "PATCH", editedTaskData);
+    fetcTasks();
     isEditing = null;
     editedTask = "";
   };
@@ -67,6 +89,12 @@
   const viewDetails = (task: { text: string; id: number }) => {
     alert(`Task Details:\n\nID: ${task.id}\nText: ${task.text}`);
   };
+
+  onMount(async () => {
+    fetcTasks();
+  });
+
+  console.log(storedTasks);
 </script>
 
 <div class="p-6 bg-white shadow-md rounded-lg">
@@ -83,7 +111,7 @@
 
   <!-- Task List -->
   <ul class="list-none">
-    {#each tasks as task (task.id)}
+    {#each storedTasks as task (task.id)}
       <li
         class="flex justify-between items-center bg-gray-100 p-4 rounded-md mb-2 shadow"
       >
