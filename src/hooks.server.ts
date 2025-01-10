@@ -1,4 +1,6 @@
 import type { Handle } from "@sveltejs/kit";
+import { redirect } from "@sveltejs/kit";
+
 import jwt from "jsonwebtoken";
 const JWT_SECRET = "svelte_jwt_secret";
 

@@ -2,6 +2,7 @@
   let navLinks = [
     { name: "Dashboard", href: "/layouts/dashboard" },
     { name: "Todo", href: "/layouts/todo" },
+    { name: "Users", href: "/layouts/users" },
     { name: "Buttons", href: "/layouts/buttons" },
     { name: "inputs", href: "/layouts/inputs" },
     { name: "Tables", href: "/layouts/tables" },

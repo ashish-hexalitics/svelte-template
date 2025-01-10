@@ -32,7 +32,7 @@
         userId = sessionData?.data?.user?.userId
         await fetchUser();
       } else {
-        console.error("No session found.");
+        console.log("No session found.");
       }
     } catch (error) {
       console.error("Failed to fetch session:", error);

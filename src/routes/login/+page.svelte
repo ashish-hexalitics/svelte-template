@@ -54,7 +54,7 @@
     <!-- Error Message -->
     {#if errorMessage}
       <div class="p-4 mt-4 text-sm text-red-700 bg-red-100 rounded-lg mb-2">
-        {errorMessage}ddddddd
+        {errorMessage}
       </div>
     {/if}
 
